@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,6 +45,15 @@ public class HelloController {
 	@RequestMapping(value = "/getBook")
 	public Book gb(@ModelAttribute(name = "idx") int idx) {
 		return idx < books.size() ? books.get(idx) : null;
+
+	}
+
+	@RequestMapping(value = "/getBookjs")
+	public Object gbjs(@ModelAttribute(name = "idx") int idx) {
+		Book b = books.size() > idx ? books.get(idx) : null;
+		if (b == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		return b;
 
 	}
 }
