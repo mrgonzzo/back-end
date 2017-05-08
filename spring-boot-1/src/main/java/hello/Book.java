@@ -4,11 +4,11 @@ public class Book {
 
 	private String name;
 	private int pages;
-	
-	public Book (String name, int pages){
-		this.name=name;
-		this.pages=pages;
-		
+	private Author author;
+
+	public Book(String name, int pages, Author author) {
+		this.name = name;
+		this.pages = pages;
 	}
 
 	public String getName() {
@@ -25,6 +25,14 @@ public class Book {
 
 	public void setPages(int pages) {
 		this.pages = pages;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 }
