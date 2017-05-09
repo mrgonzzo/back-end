@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>FilmStore</title>
+</head>
+<script type="text/javascript">
+	function call() {
+		var xhttp = new XMLHttpRequest();
+
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("result").innerHTML += this.responseText
+						+ "<br/>";
+				response = JSON.parse(this.responseText);
+				document.getElementById("title").innerHTML = response.title;
+				document.getElementById("category").innerHTML = response.category;
+				document.getElementById("directorid").innerHTML = response.director.directorid;
+				document.getElementById("directorname").innerHTML = response.director.directorname;
+				document.getElementById("directorage").innerHTML = response.director.directorage;
+			} else if (this.readyState == 4) {
+				document.getElementById("result").innerHTML += "Error:"
+						+ this.status + "<br/>";
+				document.getElementById("title").innerHTML = "";
+				document.getElementById("directorname").innerHTML = "";
+			}
+		};
+
+		xhttp.open("POST", "http://localhost:8084/createFilm")
+				+ document.getElementById(("title").value, true)
+				+ document.getElementById(("category").value, true)
+				+ document.getElementById(("directorid").value, true)
+				+ document.getElementById(("directorname").value, true)
+				+ document.getElementById(("directorage").value, true);
+		xhttp.send();
+	}
+</script>
+<body>
+Titulo<input type="text" name="title">
+category<input type="text" name="category">
+directorid<input type="number" name="directorid">
+director<input type="text" name="directorname">
+directorage<input type="number" name="directorage">
+<input type="submit">
+</body>
+</html>
