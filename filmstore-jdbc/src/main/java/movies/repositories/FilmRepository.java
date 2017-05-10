@@ -26,13 +26,13 @@ public class FilmRepository {
 	private static final String SQL_LIST_MOVIE = "SELECT * FROM TB_MOVIES M , TB_DIRECTORS D WHERE M.ID_DIRECTOR = D.ID_DIRECTOR;";
 	private static final String SQL_SELECT_MOVIE = "SELECT * FROM TB_MOVIES M , TB_DIRECTORS D WHERE M.ID_DIRECTOR = D.ID_DIRECTOR AND ID_FILM = ?;";
 //	private static final String SQL_SELECT_DIRECTOR = "SELECT ID_DIRECTOR FROM TB_MOVIES WHERE id = ?;";
-	private static final String SQL_UPDATE_DIRECTOR = "UPDATE TB_DIRECTORS SET NAME_DIRECTOR = ?, AGE = ? WHERE ID_DIRECTOR = ?;";
+	//private static final String SQL_UPDATE_DIRECTOR = "UPDATE TB_DIRECTORS SET NAME_DIRECTOR = ?, AGE = ? WHERE ID_DIRECTOR = ?;";
 	private static final String SQL_UPDATE_MOVIE = "UPDATE TB_MOVIES SET TITLE = ?, CATEGORY = ? WHERE ID_FILM = ?;";
 	private static final String SQL_DELETE_MOVIE = "DELETE FROM TB_MOVIES WHERE ID_FILM = ?;";
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-
+	DirectorRepository dr;
 	private final RowMapper<Film> moviesRowMapper = new RowMapper<Film>() {
 		public Film mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Director d = new Director();
@@ -56,8 +56,7 @@ public class FilmRepository {
 	};
 
 	public Object update(final Film f, int id) {
-		jdbcTemplate.update(SQL_UPDATE_DIRECTOR, f.getDirector().getName(), f.getDirector().getAge(),
-				f.getDirector().getId());
+		dr.updateDirector(f);
 		int rows = jdbcTemplate.update(SQL_UPDATE_MOVIE, f.getTitle(), f.getCategory(), id);
 		Object o = Collections.singletonMap("success", rows == 1);
 		return o;
