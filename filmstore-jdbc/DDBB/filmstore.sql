@@ -13,7 +13,11 @@ CREATE TABLE TB_MOVIES(ID_FILM INT NOT NULL AUTO_INCREMENT,
 						   TITLE varchar (50) NOT NULL,
                            CATEGORY varchar (50),
                            ID_DIRECTOR INT,
-                           PRIMARY KEY (ID_FILM));
+                           PRIMARY KEY (ID_FILM),
+                           CONSTRAINT FK_MOVIE_DIRECTOR FOREIGN KEY (ID_DIRECTOR)
+                           REFERENCES TB_DIRECTORS (ID_DIRECTOR)
+                           ON DELETE NO ACTION
+                           ON UPDATE NO ACTION);
                            
 
 
@@ -29,7 +33,7 @@ SELECT TITLE,CATEGORY, NAME_DIRECTOR,AGE FROM TB_MOVIES M , TB_DIRECTORS D WHERE
 DELETE * FROM TB_MOVIES WHERE ID_FILM = ?;
 <--create-->
 INSERT INTO TB_DIRECTORS VALUES(null,?,?);
-INSERT INTO TB_MOVIES VALUES(null,?,?,(SELECT ID_DIRECTOR FROM TB_DIRECTORS WHERE NAME_DIRECTOR = ? AND AGE = ?));
-
+INSERT INTO TB_MOVIES VALUES(null,?,?,(SELECT ID_DIRECTOR FROM TB_DIRECTORS WHERE NAME_DIRECTOR = ?));
+<-- update -->
 
 

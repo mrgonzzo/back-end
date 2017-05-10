@@ -6,12 +6,12 @@ private String title;
 private String category;
 private Director director;
 
-public Film(String title,String category){
+/*public Film(String title,String category){
 	//this.id = id;
 	this.title = title;
 	this.category = category;
 	//this.director=director;
-}
+}*/
 public int getId() {
 	return id;
 }
