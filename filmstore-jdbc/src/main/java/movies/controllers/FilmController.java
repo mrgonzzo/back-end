@@ -1,44 +1,23 @@
-package controllers;
+package movies.controllers;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import models.Director;
-import models.Film;
+import movies.model.Director;
+import movies.model.Film;
+import movies.repositories.FilmRepository;
 //instalar en el navegador el plugin  RESTED
 @RestController
 @RequestMapping(value = "/movies")
 public class FilmController {
 	List<Film> movies = new ArrayList<>();
-	private static final String SQL_INSERT_DIRECTOR = "INSERT INTO TB_DIRECTORS (NAME_DIRECTOR, AGE) VALUES (?, ?)";
-	private static final String SQL_INSERT_MOVIE = "INSERT INTO TB_MOVIES (TITLE, CATEGORY, ID_DIRECTOR) VALUES (?, ?, ?);";
-	private static final String SQL_LIST_MOVIE = "SELECT * FROM TB_MOVIES M , TB_DIRECTORS D WHERE M.ID_DIRECTOR = D.ID_DIRECTOR;";
-	private static final String SQL_SELECT_MOVIE = "SELECT * FROM TB_MOVIES M , TB_DIRECTORS D WHERE M.ID_DIRECTOR =	 D.ID_DIRECTOR AND ID_FILM = ?;";
-	//private static final String SQL_SELECT_DIRECTOR = "SELECT ID_DIRECTOR FROM TB_MOVIES WHERE id = ?;";
-	private static final String SQL_UPDATE_DIRECTOR = "UPDATE TB_DIRECTORS SET NAME_DIRECTOR = ?, AGE = ? WHERE ID_DIRECTOR = ?;";
-	private static final String SQL_UPDATE_MOVIE = "UPDATE TB_MOVIES SET TITLE = ?, CATEGORY = ? WHERE ID_FILM = ?;";
-	private static final String SQL_DELETE_MOVIE = "DELETE FROM TB_MOVIES WHERE ID_FILM = ?;";
-
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	FilmRepository fr;
 
 	public FilmController() {
 
@@ -63,30 +42,15 @@ public class FilmController {
 		movies.add(movie2);
 	};
 
-	private final RowMapper<Film> moviesRowMapper = new RowMapper<Film>() {
-		public Film mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Director d = new Director();
-			d.setId(rs.getInt("ID_DIRECTOR"));
-			d.setAge(rs.getInt("AGE"));
-			d.setName(rs.getString("NAME_DIRECTOR"));
-
-			Film f = new Film();
-			f.setId(rs.getInt("ID_FILM"));
-			f.setTitle(rs.getString("TITLE"));
-			f.setCategory(rs.getString("CATEGORY"));
-			f.setDirector(d);
-
-			return f;
-		};
-	};
+	
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Film> list() {
-		List<Film> movies = jdbcTemplate.query(SQL_LIST_MOVIE, moviesRowMapper);
+		List<Film> movies = fr.list();
 		return movies;
 	};
-
-	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+}
+/*	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
 
 	public Object update(final @RequestBody Film f, @PathVariable int id) {
 
@@ -154,7 +118,7 @@ public class FilmController {
 	 * movies.size() > idx ? movies.get(idx) : null; if (movie == null) return
 	 * ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpStatus.NOT_FOUND);
 	 * return movie; }
-	 */
+	 *
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	public Object getFilm(@PathVariable int id) {
@@ -178,6 +142,6 @@ public class FilmController {
 	 * } else { message =
 	 * ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpStatus.NOT_FOUND).
 	 * toString(); } return message; }
-	 */
+	
 
-}
+} */

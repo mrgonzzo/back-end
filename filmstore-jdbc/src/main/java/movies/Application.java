@@ -1,4 +1,4 @@
-package controllers;
+package movies;
 	import java.util.Arrays;
 
 	import org.springframework.boot.CommandLineRunner;
@@ -29,6 +29,6 @@ package controllers;
 	        };
 	    }
 
-	}
+	};
 
 

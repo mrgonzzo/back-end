@@ -1,4 +1,4 @@
-package models;
+package movies.model;
 
 public class Director {
 	private int age;

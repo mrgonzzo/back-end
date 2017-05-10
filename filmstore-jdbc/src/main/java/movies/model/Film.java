@@ -1,4 +1,4 @@
-package models;
+package movies.model;
 
 public class Film {
 private int id;
