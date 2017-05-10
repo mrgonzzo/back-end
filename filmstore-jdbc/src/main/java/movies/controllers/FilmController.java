@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,12 +51,18 @@ public class FilmController {
 		List<Film> movies = fr.list();
 		return movies;
 	};
-}
-/*	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
 	public Object update(final @RequestBody Film f, @PathVariable int id) {
+		Object o = fr.update(f, id);
+		return o;
+	}
+}
+/*	
 
-		//Film f2 = jdbcTemplate.queryForObject(SQL_SELECT_MOVIE, new Object[] { id }, moviesRowMapper);
+	
+
+		Film f2 = jdbcTemplate.queryForObject(SQL_SELECT_MOVIE, new Object[] { id }, moviesRowMapper);
 		jdbcTemplate.update(SQL_UPDATE_DIRECTOR, f.getDirector().getName(), f.getDirector().getAge(),
 				f.getDirector().getId());
 		int rows = jdbcTemplate.update(SQL_UPDATE_MOVIE, f.getTitle(), f.getCategory(), id);
