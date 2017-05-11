@@ -1,9 +1,18 @@
 package movies.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Director {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id_director;
 	private int age;
 	private String name;
-	private int id;
+	
 	
 	/*public Director(int id,String name, int age) {
 		this.id=id;
@@ -12,11 +21,11 @@ public class Director {
 	}*/
 	
 	public int getId() {
-		return id;
+		return id_director;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.id_director = id;
 	}
 
 	public int getAge() {
