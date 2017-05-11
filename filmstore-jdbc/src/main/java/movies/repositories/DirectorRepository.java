@@ -2,16 +2,13 @@ package movies.repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import movies.model.Director;
 import movies.model.Film;
 
 public class DirectorRepository {
@@ -20,7 +17,7 @@ public class DirectorRepository {
 	private static final String SQL_INSERT_DIRECTOR = "INSERT INTO TB_DIRECTORS (NAME_DIRECTOR, AGE) VALUES (?, ?)";
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	private final RowMapper<Director> directorsRowMapper = new RowMapper<Director>() {
+/*	private final RowMapper<Director> directorsRowMapper = new RowMapper<Director>() {
 		public Director mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Director d = new Director();
 			d.setId(rs.getInt("ID_DIRECTOR"));
@@ -28,7 +25,7 @@ public class DirectorRepository {
 			d.setName(rs.getString("NAME_DIRECTOR"));
 			return d;
 		}
-	};
+	};*/
 	public Object updateDirector(final Film f) {
 		int rows = jdbcTemplate.update(SQL_UPDATE_DIRECTOR, f.getDirector().getName(), f.getDirector().getAge(),
 				f.getDirector().getId());

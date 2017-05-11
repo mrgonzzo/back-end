@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: filmstore
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Marina
+Built-By: formacion
 Implementation-Vendor-Id: com.vectoracademy.spboot
-Build-Jdk: 1.8.0_131
+Build-Jdk: 1.8.0_121
 Implementation-URL: http://projects.spring.io/spring-boot/filmstore/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
