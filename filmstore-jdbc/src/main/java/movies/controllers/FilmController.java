@@ -51,4 +51,10 @@ public class FilmController {
 		Film f = fr.getMovie(id);
 		return f;
 	};
+	@RequestMapping(method = RequestMethod.GET, value = "/cat/{category}")
+	public List<Film> listByCategory(@PathVariable String category ) {
+		List<Film> lc = fr.listCategory(category);
+		return lc;
+	}
+
 }

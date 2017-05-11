@@ -29,6 +29,7 @@ public class FilmRepository {
 	//private static final String SQL_UPDATE_DIRECTOR = "UPDATE TB_DIRECTORS SET NAME_DIRECTOR = ?, AGE = ? WHERE ID_DIRECTOR = ?;";
 	private static final String SQL_UPDATE_MOVIE = "UPDATE TB_MOVIES SET TITLE = ?, CATEGORY = ? WHERE ID_FILM = ?;";
 	private static final String SQL_DELETE_MOVIE = "DELETE FROM TB_MOVIES WHERE ID_FILM = ?;";
+	private static final String SQL_SELECT_CATEGORY = "SELECT * FROM TB_MOVIES WHERE CATEGORY = ? ;";
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -52,6 +53,11 @@ public class FilmRepository {
 
 	public List<Film> list() {
 		List<Film> movies = jdbcTemplate.query(SQL_LIST_MOVIE, moviesRowMapper);
+		return movies;
+	};
+	
+	public List<Film> listCategory(String cat) {
+		List<Film> movies = jdbcTemplate.query(SQL_SELECT_CATEGORY, new Object[] { cat }, moviesRowMapper);
 		return movies;
 	};
 
