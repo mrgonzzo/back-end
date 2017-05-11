@@ -13,13 +13,6 @@ public class Director {
 	private int age;
 	private String name;
 	
-	
-	/*public Director(int id,String name, int age) {
-		this.id=id;
-		this.name = name;
-		this.age = age;
-	}*/
-	
 	public int getId() {
 		return id_director;
 	}

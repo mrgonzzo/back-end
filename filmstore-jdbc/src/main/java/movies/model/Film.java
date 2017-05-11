@@ -19,12 +19,8 @@ public class Film {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_DIRECTOR")
 	private Director director;
-
-	/*
-	 * public Film(String title,String category){ //this.id = id; this.title =
-	 * title; this.category = category; //this.director=director; }
-	 */
-	public int getId() {
+	
+ public int getId() {
 		return id_film;
 	}
 

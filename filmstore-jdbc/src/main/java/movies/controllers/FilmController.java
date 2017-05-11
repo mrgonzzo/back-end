@@ -58,4 +58,10 @@ public class FilmController {
 		Film f = movieRepository.findOne(id);
 		return f;
 	};
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/cat/{cat}")
+	public List<Film> listByCategory(@PathVariable String cat) {
+		List<Film> lf=movieRepository.findByCategory(cat);
+		return lf;
+	}
 }
